@@ -1,6 +1,9 @@
 package jobportal.controller;
 
 import jakarta.transaction.Transactional;
+import jakarta.validation.Valid;
+import jobportal.repository.entity.AddCompanyRequest;
+import jobportal.repository.entity.AddCompanyResponse;
 import jobportal.repository.entity.Company;
 import jobportal.repository.entity.InfoJobs;
 import jobportal.service.CompanyService;
@@ -20,8 +23,12 @@ public class CompanyController {
     }
 
     @PostMapping("/create")
-    public Company create(@RequestBody Company company){
-        return companyService.create(company);
+    public AddCompanyResponse create(@RequestBody @Valid AddCompanyRequest company){
+
+        companyService.create(company);
+        AddCompanyResponse res = new AddCompanyResponse();
+        res.setMessage("Add new company successfully");
+        return res;
     }
 
     @GetMapping("/search-by-salary")
