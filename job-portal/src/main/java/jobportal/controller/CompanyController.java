@@ -1,16 +1,17 @@
 package jobportal.controller;
 
-import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
-import jobportal.repository.entity.AddCompanyRequest;
-import jobportal.repository.entity.AddCompanyResponse;
+import jobportal.controller.request.AddCompanyRequest;
+import jobportal.controller.response.AddCompanyResponse;
+import jobportal.controller.response.CompanyResponse;
+import jobportal.controller.response.DeleteCompanyResponse;
 import jobportal.repository.entity.Company;
-import jobportal.repository.entity.InfoJobs;
 import jobportal.service.CompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/company")
@@ -23,8 +24,29 @@ public class CompanyController {
     }
 
     @RequestMapping("/{id}")
-    public Company getCompanyById(@PathVariable(value = "id", required = false) Integer id){
-        return companyService.getCompanyById(id);
+    public CompanyResponse getCompanyById(@PathVariable(value = "id", required = false) Integer id){
+        CompanyResponse res = new CompanyResponse();
+        Optional<Company> existCompany = companyService.findCompanyById(id);
+        if (existCompany.isEmpty()) {
+            res.setMessage("No company(id="+id.toString()+") in system.");
+        } else {
+            res.setMessage("Success");
+            res.setCompany(existCompany.get());
+        }
+        return res;
+    }
+
+    @GetMapping ("/delete/{id}")
+    public DeleteCompanyResponse deleteCompany(@PathVariable(value = "id", required = true) Integer id) {
+        DeleteCompanyResponse res = new DeleteCompanyResponse();
+        Optional<Company> existCompany = companyService.findCompanyById(id);
+        if (existCompany.isEmpty()) {
+            res.setMessage("No company(id="+id.toString()+") in system.");
+        } else {
+            companyService.deleteCompany(id);
+            res.setMessage("Delete company(id="+id.toString()+") successfully.");
+        }
+        return res;
     }
 
     @PostMapping("/create")

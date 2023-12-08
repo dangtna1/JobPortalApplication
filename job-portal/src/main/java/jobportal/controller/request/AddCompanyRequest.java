@@ -1,4 +1,4 @@
-package jobportal.repository.entity;
+package jobportal.controller.request;
 
 import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotNull;

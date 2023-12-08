@@ -1,9 +1,8 @@
 package jobportal.controller;
 
 import jakarta.validation.Valid;
-import jobportal.repository.entity.AddJobRequest;
+import jobportal.controller.request.AddJobRequest;
 import jobportal.repository.entity.InfoJobs;
-import jobportal.repository.entity.Job;
 import jobportal.service.JobService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

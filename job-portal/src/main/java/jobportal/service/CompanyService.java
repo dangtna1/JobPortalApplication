@@ -1,10 +1,8 @@
 package jobportal.service;
 
 import jobportal.repository.CompanyRepository;
-import jobportal.repository.InfoJobRepository;
-import jobportal.repository.entity.AddCompanyRequest;
+import jobportal.controller.request.AddCompanyRequest;
 import jobportal.repository.entity.Company;
-import jobportal.repository.entity.InfoJobs;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,8 +18,13 @@ public class CompanyService {
         return companyRepository.findAll();
     }
 
-    public Company getCompanyById(Integer id) {
-        return companyRepository.findById(id).get() ;
+
+    public Optional<Company> findCompanyById(Integer id) {
+        return companyRepository.findById(id);
+    }
+
+    public void deleteCompany(Integer id) {
+        companyRepository.deleteById(id);
     }
 
     public void create(AddCompanyRequest company) {
