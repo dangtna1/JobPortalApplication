@@ -1,5 +1,7 @@
 package jobportal.controller;
 
+import jakarta.validation.Valid;
+import jobportal.repository.entity.AddJobRequest;
 import jobportal.repository.entity.InfoJobs;
 import jobportal.repository.entity.Job;
 import jobportal.service.JobService;
@@ -20,7 +22,7 @@ public class JobController {
     }
 
     @PostMapping("/create")
-    public void create(@RequestBody Job job){
+    public void create(@RequestBody @Valid AddJobRequest job){
         jobService.create(job);
     }
 
