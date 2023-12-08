@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.NoSuchElementException;
 
 @RestControllerAdvice
 public class ApplicationExceptionHandler {
@@ -19,6 +20,14 @@ public class ApplicationExceptionHandler {
         ex.getBindingResult().getFieldErrors().forEach(error -> {
             errorMap.put(error.getField(), error.getDefaultMessage());
         });
+        return errorMap;
+    }
+
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    @ExceptionHandler(NoSuchElementException.class)
+    public Map<String, String> handleNullRecord(NoSuchElementException ex){
+        Map<String, String> errorMap = new HashMap<>();
+        errorMap.put("message", ex.getMessage());
         return errorMap;
     }
 }

@@ -17,9 +17,14 @@ import java.util.List;
 public class CompanyController {
     @Autowired
     private CompanyService companyService;
-    @RequestMapping("/")
+    @RequestMapping("/" )
     public List<Company> getCompanies(){
         return companyService.getCompanies();
+    }
+
+    @RequestMapping("/{id}")
+    public Company getCompanyById(@PathVariable(value = "id", required = false) Integer id){
+        return companyService.getCompanyById(id);
     }
 
     @PostMapping("/create")

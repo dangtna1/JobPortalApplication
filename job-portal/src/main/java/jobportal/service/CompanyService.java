@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CompanyService {
@@ -17,6 +18,10 @@ public class CompanyService {
 
     public List<Company> getCompanies() {
         return companyRepository.findAll();
+    }
+
+    public Company getCompanyById(Integer id) {
+        return companyRepository.findById(id).get() ;
     }
 
     public void create(AddCompanyRequest company) {
