@@ -1,0 +1,12 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+.customli::before {
+    content: '\2022'; /* Unicode character for a bullet (•) */
+    color: red; /* Custom color for the bullet */
+    display: inline-block;
+    width: 1em; /* Adjust the spacing between the bullet and the text */
+    /* margin-left: -1em; Move the bullet to the left of the list item */
+  }
