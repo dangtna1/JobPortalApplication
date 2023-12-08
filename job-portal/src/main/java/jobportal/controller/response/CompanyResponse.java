@@ -4,8 +4,7 @@ import jobportal.repository.entity.Company;
 import lombok.Data;
 
 @Data
-public class CompanyResponse {
+public class CompanyResponse extends RequestBase{
 
-    private String message;
     private Company company;
 }

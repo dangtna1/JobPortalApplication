@@ -2,11 +2,14 @@ package jobportal.controller;
 
 import jakarta.validation.Valid;
 import jobportal.controller.request.AddCompanyRequest;
+import jobportal.controller.request.UpdateCompanyRequest;
 import jobportal.controller.response.AddCompanyResponse;
 import jobportal.controller.response.CompanyResponse;
 import jobportal.controller.response.DeleteCompanyResponse;
+import jobportal.controller.response.UpdateCompanyResponse;
 import jobportal.repository.entity.Company;
 import jobportal.service.CompanyService;
+import org.hibernate.sql.Update;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -45,6 +48,19 @@ public class CompanyController {
         } else {
             companyService.deleteCompany(id);
             res.setMessage("Delete company(id="+id.toString()+") successfully.");
+        }
+        return res;
+    }
+
+    @PostMapping("/update")
+    public UpdateCompanyResponse updateCompany(@RequestBody @Valid UpdateCompanyRequest company){
+        UpdateCompanyResponse res = new UpdateCompanyResponse();
+        Optional<Company> existCompany = companyService.findCompanyById(company.getId());
+        if (existCompany.isEmpty()) {
+            res.setMessage("No company(id="+company.getId().toString()+") in system.");
+        } else {
+            companyService.updateCompany(company);
+            res.setMessage("Update company(id="+company.getId().toString()+") successfully.");
         }
         return res;
     }
