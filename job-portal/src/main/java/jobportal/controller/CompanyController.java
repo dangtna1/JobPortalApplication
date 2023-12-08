@@ -55,12 +55,12 @@ public class CompanyController {
     @PostMapping("/update")
     public UpdateCompanyResponse updateCompany(@RequestBody @Valid UpdateCompanyRequest company){
         UpdateCompanyResponse res = new UpdateCompanyResponse();
-        Optional<Company> existCompany = companyService.findCompanyById(company.getId());
+        Optional<Company> existCompany = companyService.findCompanyById(company.getCompanyId());
         if (existCompany.isEmpty()) {
-            res.setMessage("No company(id="+company.getId().toString()+") in system.");
+            res.setMessage("No company(id="+company.getCompanyId().toString()+") in system.");
         } else {
             companyService.updateCompany(company);
-            res.setMessage("Update company(id="+company.getId().toString()+") successfully.");
+            res.setMessage("Update company(id="+company.getCompanyId().toString()+") successfully.");
         }
         return res;
     }

@@ -8,8 +8,7 @@ import lombok.Data;
 @Data
 public class UpdateCompanyRequest {
 
-    @Id
-    private Integer id;
+    private Integer companyId;
 
     @NotNull(message = "Company name shouldn't be null")
     @Size(max = 50, message = "Company name is 50 character maximum")

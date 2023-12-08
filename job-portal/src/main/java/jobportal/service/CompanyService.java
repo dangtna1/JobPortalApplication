@@ -29,8 +29,8 @@ public class CompanyService {
     }
 
     public void updateCompany(UpdateCompanyRequest company){
-        Company updateCompany = companyRepository.findById(company.getId()).get();
-        updateCompany.setCompanyId(company.getId());
+        Company updateCompany = companyRepository.findById(company.getCompanyId()).get();
+        updateCompany.setCompanyId(company.getCompanyId());
         updateCompany.setCompanyName(company.getCompanyName());
         updateCompany.setDescription(company.getDescription());
         updateCompany.setIndustry(company.getIndustry());
