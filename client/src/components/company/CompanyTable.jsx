@@ -1,29 +1,26 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import { companyData } from "../../assets/data";
 import { Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { updateCompanyList } from "../../store/companySlice";
+import { fetchCompanyList } from "../../assets/fetchCompanyData";
 
 export default function CompanyTable() {
-  const [data, setData] = useState([]);
+  const companyList = useSelector((state) => state.company.companyList);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    fetch("/api/company/")
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        return response.json();
-      })
-      .then((data) => {
-        setData(data);
-        console.log(data);
-      })
-      .catch((error) => {
-        console.error(
-          "There has been a problem with your fetch operation:",
-          error
-        );
-      });
+    const fetchData = async () => {
+      try {
+        const companyList = await fetchCompanyList();
+        dispatch(updateCompanyList(companyList));
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchData();
   }, []);
 
   return (
@@ -40,9 +37,9 @@ export default function CompanyTable() {
           </Link>
         </div>
         <div className="mt-2">
-          {data && (
+          {companyList && (
             <DataGrid
-              rows={data}
+              rows={companyList}
               getRowId={(row) => row.companyId} // Specify a unique id based on the companyId
               columns={companyData.columns}
               initialState={{

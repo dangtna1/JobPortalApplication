@@ -1,7 +1,12 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { fetchCompanyList } from "../../assets/fetchCompanyData";
+import { updateCompanyList } from "../../store/companySlice";
 
 const CompanyForm = () => {
+  const dispatch = useDispatch();
+
   const [formData, setFormData] = useState({
     companyId: "",
     companyName: "",
@@ -50,7 +55,6 @@ const CompanyForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    console.log(formData);
     if (validateForm()) {
       try {
         const response = await fetch("/api/company/create", {
@@ -78,6 +82,10 @@ const CompanyForm = () => {
         console.error("Error:", error);
         alert("An error occurred while posting data.");
       }
+
+      //update companyList after all
+      const companyList = await fetchCompanyList();
+      dispatch(updateCompanyList(companyList));
     }
   };
 

@@ -1,9 +1,14 @@
 import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { fetchCompanyList } from "../../assets/fetchCompanyData";
+import { updateCompanyList } from "../../store/companySlice";
 
 const CompanyEdit = () => {
   const param = useParams();
   const companyId = param.id;
+
+  const dispatch = useDispatch();
 
   const [formData, setFormData] = useState({
     companyId: "",
@@ -23,12 +28,23 @@ const CompanyEdit = () => {
         return response.json();
       })
       .then((data) => {
-        setFormData(data);
+        setFormData(data.company);
         console.log(data);
       })
       .catch((error) =>
         console.error("There was a problem with the fetch operation:", error)
       );
+
+    const fetchData = async () => {
+      try {
+        const companyList = await fetchCompanyList();
+        dispatch(updateCompanyList(companyList));
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchData();
   }, []);
 
   const [errors, setErrors] = useState({
