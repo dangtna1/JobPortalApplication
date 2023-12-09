@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { fetchCompanyList } from "../../assets/fetchCompanyData";
 import { updateCompanyList } from "../../store/companySlice";
@@ -9,6 +9,7 @@ const CompanyEdit = () => {
   const companyId = param.id;
 
   const dispatch = useDispatch();
+  const navgigate = useNavigate();
 
   const [formData, setFormData] = useState({
     companyId: "",
@@ -101,6 +102,7 @@ const CompanyEdit = () => {
             websiteUrl: "",
           });
           alert("Data updated successfully!");
+          navgigate(-1);
         } else {
           alert("Error updating data.");
         }

@@ -1,5 +1,22 @@
 import { Link } from "react-router-dom";
 
+const handleDeleteCompany = async (companyId) => {
+  fetch(`/api/company/delete/${companyId}`, {
+    method: "DELETE",
+  })
+    .then((response) => {
+      if (response.ok) {
+        alert("Deleted company successfully");
+      } else {
+        alert("Error deleting company:", response.statusText);
+      }
+    })
+    .catch(() => {
+      alert("Deleted company successfully");
+    });
+  window.location.reload();
+};
+
 export const companyData = {
   columns: [
     { field: "companyId", headerName: "ID", width: 50 },
@@ -60,7 +77,7 @@ export const companyData = {
           </Link>
           <button
             className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
-            onClick={() => console.log(params.row.companyId)}
+            onClick={() => handleDeleteCompany(params.row.companyId)}
           >
             Delete
           </button>

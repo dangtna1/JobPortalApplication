@@ -1,11 +1,12 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { fetchCompanyList } from "../../assets/fetchCompanyData";
 import { updateCompanyList } from "../../store/companySlice";
 
 const CompanyForm = () => {
   const dispatch = useDispatch();
+  const navgigate = useNavigate();
 
   const [formData, setFormData] = useState({
     companyName: "",
@@ -46,6 +47,8 @@ const CompanyForm = () => {
   };
 
   const handleSubmit = async (e) => {
+    console.log(formData);
+
     e.preventDefault();
 
     if (validateForm()) {
@@ -67,6 +70,8 @@ const CompanyForm = () => {
             websiteUrl: "",
           });
           alert("Data posted successfully!");
+
+          navgigate(-1);
         } else {
           alert("Error posting data to the API.");
         }
