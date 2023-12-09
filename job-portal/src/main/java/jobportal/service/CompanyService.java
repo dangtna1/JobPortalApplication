@@ -23,7 +23,6 @@ public class CompanyService {
         return companyRepository.findAll();
     }
 
-
     public Optional<Company> findCompanyById(Integer id) {
         return companyRepository.findById(id);
     }
