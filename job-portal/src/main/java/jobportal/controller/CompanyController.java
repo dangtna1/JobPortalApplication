@@ -42,7 +42,7 @@ public class CompanyController {
         return res;
     }
 
-    @GetMapping ("/delete/{id}")
+    @DeleteMapping ("/delete/{id}")
     public DeleteCompanyResponse deleteCompany(@PathVariable(value = "id", required = true) Integer id) {
         DeleteCompanyResponse res = new DeleteCompanyResponse();
         Optional<Company> existCompany = companyService.findCompanyById(id);
