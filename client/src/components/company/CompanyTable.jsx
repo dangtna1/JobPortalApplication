@@ -41,13 +41,16 @@ export default function CompanyTable() {
             <DataGrid
               rows={companyList}
               getRowId={(row) => row.companyId} // Specify a unique id based on the companyId
-              columns={companyData.columns}
+              columns={ companyData.columns}
+              columnVisibilityModel={{
+                companyId: false,
+                }} 
               initialState={{
                 pagination: {
-                  paginationModel: { page: 0, pageSize: 5 },
+                  paginationModel: { page: 0, pageSize: 10 },
                 },
               }}
-              pageSizeOptions={[5, 10]}
+              pageSizeOptions={[10, 15]}
               checkboxSelection
               autoHeight={true}
             />
