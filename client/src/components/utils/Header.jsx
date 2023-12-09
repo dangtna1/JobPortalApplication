@@ -11,7 +11,7 @@ const Header = () => {
         setTab(location.pathname.split("/")[1] === "" ? "home" : location.pathname.split("/")[1]);
     }, [location]);
     return (
-        <div className='fixed top-0 w-full bg-gradient-to-r from-[#000000] from-50% to-[#990033] to-100% h-[15vh] text-white flex'>
+        <div className='z-[3000] fixed top-0 w-full bg-gradient-to-r from-[#000000] from-50% to-[#990033] to-100% h-[15vh] text-white flex'>
             <div className='text-3xl h-[100%] flex flex-col justify-center px-3'>
                 <Link to="home" className='select-none'>
                     <span className='bg-red-600 py-3 px-1 rounded-full'>Job</span>
