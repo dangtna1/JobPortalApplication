@@ -53,3 +53,25 @@ export const searchCompany = async ({ keyword, salary }) => {
     throw err;
   }
 };
+
+
+export const deleteJob = async (id) => {
+    try {
+
+        console.log(`api/job?id=${id}`)
+        const res = await fetch(`api/job?id=${id}`,{
+            method: 'DELETE',
+        });
+
+        if (!res.ok) {
+            throw new Error("Network response was not ok");
+        }
+
+        const data = await res.json();
+        return data;
+
+    } catch (err) {
+        console.log(err);
+        throw (err);
+    }
+}

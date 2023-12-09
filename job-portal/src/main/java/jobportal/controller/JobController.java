@@ -29,4 +29,10 @@ public class JobController {
     public List<InfoJobs> searchJobs(@RequestParam String keyword, @RequestParam Integer salary){
         return jobService.searchJobs(keyword, salary);
     }
+
+    @DeleteMapping("")
+    public List<InfoJobs> deleteJob(@RequestParam Integer id){
+        jobService.deleteJob(id);
+        return getInfoJobs();
+    }
 }
