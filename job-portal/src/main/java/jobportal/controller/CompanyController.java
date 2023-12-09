@@ -71,7 +71,6 @@ public class CompanyController {
 
     @PostMapping("/create")
     public AddCompanyResponse create(@RequestBody @Valid AddCompanyRequest company){
-
         companyService.create(company);
         AddCompanyResponse res = new AddCompanyResponse();
         res.setMessage("Add new company successfully");
