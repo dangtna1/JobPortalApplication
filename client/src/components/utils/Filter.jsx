@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux'
 import { searchJob } from '../../assets/api'
 import { updateJobList } from '../../store/jobSlice'
 
-const Filter = () => {
+const Filter = ({handleClose}) => {
     const dispatch = useDispatch();
 
     const handleSubmit = async (event) => {
@@ -21,6 +21,7 @@ const Filter = () => {
         } catch (err) {
             console.log(err);
         }
+        handleClose()
     }
     return (
         <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 0 }}>

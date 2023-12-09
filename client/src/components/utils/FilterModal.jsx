@@ -37,7 +37,7 @@ export default function FilterModal() {
 
             >
                 <Box sx={style}>
-                    <Filter />
+                    <Filter handleClose={handleClose}/>
                 </Box>
             </Modal>
         </div>
