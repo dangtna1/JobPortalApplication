@@ -72,6 +72,7 @@ export default function CustomMenu() {
                     anchor={'right'}
                     open={state['right']}
                     onClose={toggleDrawer('right', false)}
+                    sx={{ zIndex: 4000 }}
                 >
                     {list('right')}
                 </Drawer>

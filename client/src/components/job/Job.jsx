@@ -2,19 +2,28 @@ import { Chip, Divider } from '@mui/material'
 import React from 'react'
 import BusinessIcon from '@mui/icons-material/Business';
 import PlaceIcon from '@mui/icons-material/Place';
+import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 
-const Job = () => {
+const Job = ({ jobInfo }) => {
+    const formatter = new Intl.NumberFormat('vi-VN', {
+        style: 'currency',
+        currency: 'VND',
+    });
+
+    const { address, companyName, deadline, industry, jobSkills, salary, title } = jobInfo;
     return (
         <div className='flex flex-col gap-2 bg-orange-100 p-8 pt-0 rounded-lg m-4 cursor-pointer hover:border border-red-600 '>
             <div>
-                <p className='py-2 text-black text-opacity-40'>Posted 2 hours ago</p>
-                <p className='text-2xl font-bold font-sans'>Backend Developer (C/C++,SQL,C#)</p>
+                <p className='py-2 text-black text-opacity-40'>{deadline.slice(0, -3)}</p>
+                <p className='text-2xl font-bold font-sans'>{title}</p>
                 <a href='/profile/companies/abcdefgh' className='flex gap-2 items-center my-2'>
                     <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/LG_symbol.svg/640px-LG_symbol.svg.png"
                         alt="404" className='w-6' />
-                    <p>A Company</p>
+                    <p>{companyName}</p>
                 </a>
-
+                <div>
+                    {industry}
+                </div>
             </div>
 
             <Divider />
@@ -23,19 +32,32 @@ const Job = () => {
                 <span>At Office</span>
             </div>
             <div className='flex items-center gap-2'>
+                <AttachMoneyIcon />
+                <span>{formatter.format(salary)}</span>
+            </div>
+            <div className='flex items-center gap-2'>
                 <PlaceIcon />
-                <span>Ho Chi Minh</span>
+                <span>{address}</span>
             </div>
             <div className='flex gap-2'>
-                <Chip label="C++" variant="outlined" style={{ cursor: "pointer" }} />
-                <Chip label="C#" variant="outlined" style={{ cursor: "pointer" }} />
-                <Chip label="SQL" variant="outlined" style={{ cursor: "pointer" }} />
+                {
+                    jobSkills.map((skill, index) => (
+                        <Chip key={index} label={skill.name} variant="outlined" style={{ cursor: "pointer" }} />
+                    ))
+                }
             </div>
             <Divider />
             <ul >
-                <li className='customli'>Mức lương thỏa thuận</li>
-                <li className='customli'>Cơ hội thăng tiến</li>
-                <li className='customli'>Du lịch hằng năm</li>
+                {
+                    jobSkills.map((skill, index) => (
+                        <li className='customli' key={index}>
+                            <span>Có kinh nghiệm về</span>
+                            <span className='font-bold font-sans'>{` ${skill.name.toUpperCase()} `}</span>
+                            <span>từ</span>
+                            <span>{` ${skill.duration} năm trở lên`}</span>
+                        </li>
+                    ))
+                }
             </ul>
         </div>
     )
