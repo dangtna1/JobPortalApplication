@@ -11,6 +11,6 @@ public class UserService {
     private UserRepository userRepository;
 
     public void deleteUser(Integer id){
-        userRepository.deleteById(id);
+        userRepository.deleteByUserId(id);
     }
 }

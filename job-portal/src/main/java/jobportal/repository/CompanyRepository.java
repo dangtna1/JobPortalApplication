@@ -10,6 +10,8 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 public interface CompanyRepository extends JpaRepository<Company, Integer> {
+    Company findByCompanyName(String companyName);
+    Company deleteByCompanyId(Integer id);
     @Query(value = "CALL findCompanyBySalaryOfJob(:salary,:keyword);", nativeQuery = true)
     List<Company> searchCompanyBySalaryOfJob(@Param("salary") Integer salary, @Param("keyword") String keyword);
 

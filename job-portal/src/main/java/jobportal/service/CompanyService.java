@@ -3,7 +3,9 @@ package jobportal.service;
 import jobportal.controller.json.request.UpdateCompanyRequest;
 import jobportal.repository.CompanyRepository;
 import jobportal.controller.json.request.AddCompanyRequest;
+import jobportal.repository.UserRepository;
 import jobportal.repository.entity.Company;
+import jobportal.repository.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +16,8 @@ import java.util.Optional;
 public class CompanyService {
     @Autowired
     private CompanyRepository companyRepository;
+    @Autowired
+    private UserRepository userRepository;
 
     public List<Company> getCompanies() {
         return companyRepository.findAll();
@@ -25,7 +29,7 @@ public class CompanyService {
     }
 
     public void deleteCompany(Integer id) {
-        companyRepository.deleteById(id);
+        companyRepository.deleteByCompanyId(id);
     }
 
     public void updateCompany(UpdateCompanyRequest company){
@@ -40,7 +44,17 @@ public class CompanyService {
     }
 
     public void create(AddCompanyRequest company) {
+        userRepository.save(
+            new User(
+                company.getCompanyName(),
+                company.getPhoneNumber(),
+                "COMPANY",
+                company.getEmail()
+            )
+        );
+        User user = userRepository.findByEmail(company.getEmail());
         Company newCompany = this.setAddParameterType(company);
+        newCompany.setCompanyId(user.getUserId());
         companyRepository.save(newCompany);
     }
 
