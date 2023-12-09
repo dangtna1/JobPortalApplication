@@ -61,11 +61,6 @@ const CompanyEdit = () => {
     const newErrors = {};
 
     // Validate
-    if (!formData.companyId) {
-      newErrors.companyId = "Company ID is required";
-      isValid = false;
-    }
-
     if (!formData.companyName) {
       newErrors.companyName = "Company Name is required";
       isValid = false;
@@ -86,10 +81,9 @@ const CompanyEdit = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    console.log(formData);
     if (validateForm()) {
       try {
-        const response = await fetch("/api/company/create", {
+        const response = await fetch("/api/company/update", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -106,13 +100,13 @@ const CompanyEdit = () => {
             description: "",
             websiteUrl: "",
           });
-          alert("Data posted successfully!");
+          alert("Data updated successfully!");
         } else {
-          alert("Error posting data to the API.");
+          alert("Error updating data.");
         }
       } catch (error) {
         console.error("Error:", error);
-        alert("An error occurred while posting data.");
+        alert("An error occurred while updating data.");
       }
     }
   };
@@ -133,6 +127,7 @@ const CompanyEdit = () => {
             className={`border rounded-md p-2 w-full ${
               errors.companyId ? "border-red-500" : ""
             }`}
+            disabled
           />
           {errors.companyId && (
             <p className="text-red-500">{errors.companyId}</p>

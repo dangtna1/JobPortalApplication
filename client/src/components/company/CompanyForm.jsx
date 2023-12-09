@@ -8,7 +8,6 @@ const CompanyForm = () => {
   const dispatch = useDispatch();
 
   const [formData, setFormData] = useState({
-    companyId: "",
     companyName: "",
     phoneNumber: "",
     industry: "",
@@ -17,7 +16,6 @@ const CompanyForm = () => {
   });
 
   const [errors, setErrors] = useState({
-    companyId: "",
     companyName: "",
     phoneNumber: "",
     industry: "",
@@ -30,11 +28,6 @@ const CompanyForm = () => {
     const newErrors = {};
 
     // Validate
-    if (!formData.companyId) {
-      newErrors.companyId = "Company ID is required";
-      isValid = false;
-    }
-
     if (!formData.companyName) {
       newErrors.companyName = "Company Name is required";
       isValid = false;
@@ -67,7 +60,6 @@ const CompanyForm = () => {
 
         if (response.ok) {
           setFormData({
-            companyId: "",
             companyName: "",
             phoneNumber: "",
             industry: "",
@@ -94,22 +86,6 @@ const CompanyForm = () => {
       <h1 className="text-2xl font-semibold mb-4">Add a company</h1>
 
       <form onSubmit={handleSubmit} className="space-y-4">
-        <div>
-          <label htmlFor="companyId">Company ID:</label>
-          <input
-            type="text"
-            id="companyId"
-            name="companyId"
-            value={formData.companyId}
-            onChange={handleInputChange}
-            className={`border rounded-md p-2 w-full ${
-              errors.companyId ? "border-red-500" : ""
-            }`}
-          />
-          {errors.companyId && (
-            <p className="text-red-500">{errors.companyId}</p>
-          )}
-        </div>
         <div>
           <label htmlFor="companyName">Company Name:</label>
           <input
