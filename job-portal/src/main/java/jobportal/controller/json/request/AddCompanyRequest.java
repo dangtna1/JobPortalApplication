@@ -15,4 +15,5 @@ public class AddCompanyRequest {
     private String industry;
     private String description;
     private String websiteUrl;
+    private String email;
 }

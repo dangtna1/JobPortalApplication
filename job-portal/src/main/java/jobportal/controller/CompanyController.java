@@ -11,6 +11,7 @@ import jobportal.repository.entity.Company;
 import jobportal.service.CompanyService;
 import jobportal.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -43,13 +44,13 @@ public class CompanyController {
     }
 
     @DeleteMapping ("/delete/{id}")
+    @Transactional
     public DeleteCompanyResponse deleteCompany(@PathVariable(value = "id", required = true) Integer id) {
         DeleteCompanyResponse res = new DeleteCompanyResponse();
         Optional<Company> existCompany = companyService.findCompanyById(id);
         if (existCompany.isEmpty()) {
             res.setMessage("No company(id="+id.toString()+") in system.");
         } else {
-            companyService.deleteCompany(id);
             userService.deleteUser(id);
             res.setMessage("Delete company(id="+id.toString()+") successfully.");
         }
