@@ -1,15 +1,15 @@
 package jobportal.controller;
 
 import jakarta.validation.Valid;
-import jobportal.controller.request.AddCompanyRequest;
-import jobportal.controller.request.UpdateCompanyRequest;
-import jobportal.controller.response.AddCompanyResponse;
-import jobportal.controller.response.CompanyResponse;
-import jobportal.controller.response.DeleteCompanyResponse;
-import jobportal.controller.response.UpdateCompanyResponse;
+import jobportal.controller.json.request.AddCompanyRequest;
+import jobportal.controller.json.request.UpdateCompanyRequest;
+import jobportal.controller.json.response.AddCompanyResponse;
+import jobportal.controller.json.response.CompanyResponse;
+import jobportal.controller.json.response.DeleteCompanyResponse;
+import jobportal.controller.json.response.UpdateCompanyResponse;
 import jobportal.repository.entity.Company;
 import jobportal.service.CompanyService;
-import org.hibernate.sql.Update;
+import jobportal.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,6 +21,9 @@ import java.util.Optional;
 public class CompanyController {
     @Autowired
     private CompanyService companyService;
+
+    @Autowired
+    private UserService userService;
     @RequestMapping("/" )
     public List<Company> getCompanies(){
         return companyService.getCompanies();
@@ -47,6 +50,7 @@ public class CompanyController {
             res.setMessage("No company(id="+id.toString()+") in system.");
         } else {
             companyService.deleteCompany(id);
+            userService.deleteUser(id);
             res.setMessage("Delete company(id="+id.toString()+") successfully.");
         }
         return res;

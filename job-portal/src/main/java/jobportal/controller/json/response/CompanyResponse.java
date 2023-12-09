@@ -1,4 +1,4 @@
-package jobportal.controller.response;
+package jobportal.controller.json.response;
 
 import jobportal.repository.entity.Company;
 import lombok.Data;

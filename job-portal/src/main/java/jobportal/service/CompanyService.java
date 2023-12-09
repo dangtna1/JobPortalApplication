@@ -1,8 +1,8 @@
 package jobportal.service;
 
-import jobportal.controller.request.UpdateCompanyRequest;
+import jobportal.controller.json.request.UpdateCompanyRequest;
 import jobportal.repository.CompanyRepository;
-import jobportal.controller.request.AddCompanyRequest;
+import jobportal.controller.json.request.AddCompanyRequest;
 import jobportal.repository.entity.Company;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -1,4 +1,4 @@
-package jobportal.controller.request;
+package jobportal.controller.json.request;
 
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;

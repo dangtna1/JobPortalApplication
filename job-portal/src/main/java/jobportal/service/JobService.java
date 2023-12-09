@@ -2,7 +2,7 @@ package jobportal.service;
 
 import jobportal.repository.InfoJobRepository;
 import jobportal.repository.JobRepository;
-import jobportal.controller.request.AddJobRequest;
+import jobportal.controller.json.request.AddJobRequest;
 import jobportal.repository.entity.InfoJobs;
 import jobportal.repository.entity.Job;
 import org.springframework.beans.factory.annotation.Autowired;
