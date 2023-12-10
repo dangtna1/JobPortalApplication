@@ -22,8 +22,8 @@ const Header = () => {
                 isSm ?
                     (<div className='w-2/3 flex items-end text-xl justify-center'>
                         <div className='w-full sm:w-[90%] lg:w-[70%] flex items-end text-xl justify-between'>
-                            <Link to="home">
-                                <div className={`${tab === "home" ? "border-b-4 border-red-600 px-2 rounded-t-xl text-red-600" : "bg-none text-white"} font-semibold cursor-pointer select-none`}
+                            <Link to="job">
+                                <div className={`${tab === "job" ? "border-b-4 border-red-600 px-2 rounded-t-xl text-red-600" : "bg-none text-white"} font-semibold cursor-pointer select-none`}
                                 >
                                     Home
                                 </div>

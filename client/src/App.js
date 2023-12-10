@@ -11,15 +11,17 @@ import Layout from "./components/utils/Layout";
 import Login from "./components/auth/Login";
 import Register from "./components/auth/Register";
 import JobEdit from "./components/job/JobEdit";
+import JobProfile from "./components/job/JobProfile";
 
 function App() {
   return (
-    <div className="w-full">
+    <div className="w-full ">
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route path="/" element={<Navigate to="/job" />} />
           <Route path="/job/" element={<Home />} />
           <Route path="/job/edit/:id" element={<JobEdit />} />
+          <Route path="/job/detail/:id" element={<JobProfile />} />
           <Route path="/company" element={<CompanyTable />} />
           <Route path="/company/create" element={<CompanyForm />} />
           <Route path="/company/edit/:id" element={<CompanyEdit />} />

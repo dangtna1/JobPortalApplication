@@ -93,6 +93,7 @@ const JobEdit = () => {
       };
 
     return (
+      <div className='w-full border shadow-lg p-8 text-xl rounded-lg '>
         <div className="container mx-auto">
         <h1 className="text-2xl font-semibold mb-4">Add a company</h1>
   
@@ -237,13 +238,14 @@ const JobEdit = () => {
             </Link>
             <button
               type="submit"
-              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mx-2"
             >
               Submit
             </button>
           </div>
           
         </form>
+      </div>
       </div>
     )
 }

@@ -24,7 +24,7 @@ const Home = () => {
     }, [dispatch]);
 
     return (
-        <div className='w-full flex flex-col items-center justify-center'>
+        <div className='w-full flex flex-col items-center justify-center '>
             <div className='w-full p-4 z-0'>
                 <FilterModal />
             </div>
