@@ -38,13 +38,13 @@ export default function CustomMenu() {
             onKeyDown={toggleDrawer(anchor, false)}
         >
             <List>
-                {['Home', 'Company', 'JobSeeker'].map((text, index) => (
+                {['Job', 'Company', 'JobSeeker'].map((text, index) => (
                     <Link to={text.toLowerCase()} key={index}>
                         <ListItem disablePadding>
                             <ListItemButton>
                                 <ListItemIcon>
                                     {
-                                        text === "Home" ? (
+                                        text === "Job" ? (
                                             <HomeIcon />
                                         ) : text === "Company" ? (
                                             <ApartmentIcon />

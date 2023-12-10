@@ -3,8 +3,8 @@ import React from 'react'
 import BusinessIcon from '@mui/icons-material/Business';
 import PlaceIcon from '@mui/icons-material/Place';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
-import { confirmAlert } from 'react-confirm-alert'; 
-import 'react-confirm-alert/src/react-confirm-alert.css'; 
+import { confirmAlert } from 'react-confirm-alert';
+import 'react-confirm-alert/src/react-confirm-alert.css';
 import { deleteJob } from '../../assets/api';
 import { useDispatch } from 'react-redux';
 import { updateJobList } from '../../store/jobSlice';
@@ -14,7 +14,7 @@ import { useNavigate } from 'react-router-dom';
 
 
 const Job = ({ jobInfo }) => {
-    console.log("jobInfo",jobInfo)
+    // console.log("jobInfo",jobInfo)
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const formatter = new Intl.NumberFormat('vi-VN', {
@@ -23,24 +23,24 @@ const Job = ({ jobInfo }) => {
     });
 
     const handleDelete = (id) => {
-        console.log("id:",id)
+        console.log("id:", id)
         confirmAlert({
             title: 'Confirm to delete',
             message: 'Are you sure to delete this.',
             buttons: [
-              {
-                label: 'Yes',
-                onClick: async () => {
-                    const jobList = await deleteJob(id)
-                    dispatch(updateJobList(jobList));
+                {
+                    label: 'Yes',
+                    onClick: async () => {
+                        const jobList = await deleteJob(id)
+                        dispatch(updateJobList(jobList));
+                    }
+                },
+                {
+                    label: 'No',
+                    onClick: () => { }
                 }
-              },
-              {
-                label: 'No',
-                onClick: () => {}
-              }
             ]
-          });
+        });
     }
     const { jobId, address, companyName, deadline, industry, jobSkills, salary, title } = jobInfo;
     return (
@@ -89,8 +89,8 @@ const Job = ({ jobInfo }) => {
             </ul>
             <Divider />
             <Grid container gap={2} justifyContent="flex-end">
-                <DeleteIcon onClick={() => handleDelete(jobId)}/>
-                <EditIcon onClick={() => {navigate(`edit/${jobId}`,  { state: jobInfo })}}/>
+                <DeleteIcon onClick={() => handleDelete(jobId)} />
+                <EditIcon onClick={() => { navigate(`edit/${jobId}`, { state: jobInfo }) }} />
             </Grid>
         </div>
     )

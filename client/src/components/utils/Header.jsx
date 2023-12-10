@@ -6,14 +6,14 @@ import { useMediaQuery } from '@mui/material';
 const Header = () => {
     const isSm = useMediaQuery('(min-width:600px)');
     const location = useLocation();
-    const [tab, setTab] = useState(location.pathname.split("/")[1] === "" ? "home" : location.pathname.split("/")[1]);
+    const [tab, setTab] = useState(location.pathname.split("/")[1] === "" ? "job" : location.pathname.split("/")[1]);
     useEffect(() => {
-        setTab(location.pathname.split("/")[1] === "" ? "home" : location.pathname.split("/")[1]);
+        setTab(location.pathname.split("/")[1] === "" ? "job" : location.pathname.split("/")[1]);
     }, [location]);
     return (
         <div className='z-[3000] fixed top-0 w-full bg-gradient-to-r from-[#000000] from-50% to-[#990033] to-100% h-[15vh] text-white flex'>
             <div className='text-3xl h-[100%] flex flex-col justify-center px-3'>
-                <Link to="home" className='select-none'>
+                <Link to="job" className='select-none'>
                     <span className='bg-red-600 py-3 px-1 rounded-full'>Job</span>
                     <span>Portal</span>
                 </Link>
@@ -25,7 +25,7 @@ const Header = () => {
                             <Link to="job">
                                 <div className={`${tab === "job" ? "border-b-4 border-red-600 px-2 rounded-t-xl text-red-600" : "bg-none text-white"} font-semibold cursor-pointer select-none`}
                                 >
-                                    Home
+                                    Job
                                 </div>
                             </Link>
                             <Link to="company">
