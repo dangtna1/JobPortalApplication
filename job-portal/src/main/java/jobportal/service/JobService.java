@@ -61,4 +61,12 @@ public class JobService {
     public List<InfoJobs> searchJobs(String keyword, Integer salary){
         return infoJobRepository.searchJobs(keyword, salary);
     }
+    public void deleteJob(Integer id){
+        try{
+            jobRepository.deleteById(id);
+        }
+        catch (Exception e){
+            throw e;
+        }
+    }
 }

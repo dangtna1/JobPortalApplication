@@ -14,6 +14,7 @@ const CompanyForm = () => {
     industry: "",
     description: "",
     websiteUrl: "",
+    email: ""
   });
 
   const [errors, setErrors] = useState({
@@ -22,6 +23,7 @@ const CompanyForm = () => {
     industry: "",
     description: "",
     websiteUrl: "",
+    email: ""
   });
 
   const validateForm = () => {
@@ -34,6 +36,10 @@ const CompanyForm = () => {
       isValid = false;
     }
 
+    if (!formData.email) {
+      newErrors.email = "Company email is required";
+      isValid = false;
+    }
     setErrors(newErrors);
     return isValid;
   };
@@ -68,6 +74,7 @@ const CompanyForm = () => {
             industry: "",
             description: "",
             websiteUrl: "",
+            email: ""
           });
           alert("Data posted successfully!");
 
@@ -146,6 +153,17 @@ const CompanyForm = () => {
             id="websiteUrl"
             name="websiteUrl"
             value={formData.websiteUrl}
+            onChange={handleInputChange}
+            className="border rounded-md p-2 w-full"
+          />
+        </div>
+        <div>
+          <label htmlFor="websiteUrl">Email:</label>
+          <input
+            type="text"
+            id="email"
+            name="email"
+            value={formData.email}
             onChange={handleInputChange}
             className="border rounded-md p-2 w-full"
           />

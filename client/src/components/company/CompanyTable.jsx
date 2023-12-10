@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { updateCompanyList } from "../../store/companySlice";
 import { fetchCompanyList } from "../../assets/fetchCompanyData";
+import MyFilterModal from "../utils/MyFilterModal";
 
 export default function CompanyTable() {
   const companyList = useSelector((state) => state.company.companyList);
@@ -25,8 +26,11 @@ export default function CompanyTable() {
 
   return (
     <div className="w-full">
-      <div className="font-semibold text-2xl px-2 py-4">Company</div>
+      {/* <div className="font-semibold text-2xl px-2 py-4">Company</div> */}
 
+      <div className="w-full p-4 z-0">
+        <MyFilterModal />
+      </div>
       <div style={{ height: "70vh", width: "100%" }} className="mb-4">
         <div>
           <Link
@@ -36,18 +40,22 @@ export default function CompanyTable() {
             New Company
           </Link>
         </div>
+
         <div className="mt-2">
           {companyList && (
             <DataGrid
               rows={companyList}
               getRowId={(row) => row.companyId} // Specify a unique id based on the companyId
               columns={companyData.columns}
+              columnVisibilityModel={{
+                companyId: false,
+              }}
               initialState={{
                 pagination: {
-                  paginationModel: { page: 0, pageSize: 5 },
+                  paginationModel: { page: 0, pageSize: 10 },
                 },
               }}
-              pageSizeOptions={[5, 10]}
+              pageSizeOptions={[10, 15]}
               checkboxSelection
               autoHeight={true}
             />
