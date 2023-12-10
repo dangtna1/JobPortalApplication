@@ -15,7 +15,7 @@ import JobProfile from "./components/job/JobProfile";
 
 function App() {
   return (
-    <div className="w-full ">
+    <div className="w-full">
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route path="/" element={<Navigate to="/job" />} />

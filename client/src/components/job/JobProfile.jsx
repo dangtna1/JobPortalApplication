@@ -1,17 +1,19 @@
 import { Button, Chip, Divider, Stack } from '@mui/material'
 import React, { useState } from 'react'
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import BusinessIcon from '@mui/icons-material/Business';
 import PlaceIcon from '@mui/icons-material/Place';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
+
 const JobProfile = () => {
+    const navigate = useNavigate();
     const location = useLocation();
     const [job, setJob] = useState(location.state);
     const formatter = new Intl.NumberFormat('vi-VN', {
         style: 'currency',
         currency: 'VND',
     });
-    console.log(job)
+
     return (
         <div className='w-full flex flex-col items-center gap-5'>
             {/* <div className='w-full bg-gradient-to-r from-[#000000] from-50% to-[#990033] to-100% h-[20vh] text-white flex justify-center'>
@@ -96,7 +98,7 @@ const JobProfile = () => {
                 <p>{job.address}</p>
             </div>
             <Stack gap={1} sx={{width:"60%"}}>
-                <Button variant="contained">Apply</Button>
+                <Button variant="contained" >Apply</Button>
                 <Button variant="contained">Save</Button>
             </Stack>
         </div>

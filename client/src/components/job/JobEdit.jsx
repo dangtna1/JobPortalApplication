@@ -32,6 +32,11 @@ const JobEdit = () => {
           isValid = false;
         }
 
+        if (formData.salary <= 0) {
+          newErrors.salary = "Invalid Salary";
+          isValid = false;
+        }
+
         if (!formData.title) {
             newErrors.title = "Job title is required";
             isValid = false;
@@ -41,11 +46,25 @@ const JobEdit = () => {
             newErrors.maxNoApplicants = "Max Number Of Application is required";
             isValid = false;
         }
+        if (formData.maxNoApplicants < 0) {
+          newErrors.maxNoApplicants = "Invalid number";
+          isValid = false;
+      }
         setErrors(newErrors);
         return isValid;
       };
 
       const handleInputChange = (e) => {
+        setErrors({
+          jobId: "",
+          address: "",
+          companyName: "",
+          deadline: "",
+          industry: "",
+          jobSkills: "",
+          salary:"",
+          title:"",
+        })
         const { name, value } = e.target;
         setFormData({
           ...formData,
@@ -95,7 +114,7 @@ const JobEdit = () => {
     return (
       <div className='w-full border shadow-lg p-8 text-xl rounded-lg '>
         <div className="container mx-auto">
-        <h1 className="text-2xl font-semibold mb-4">Add a company</h1>
+        <h1 className="text-2xl font-semibold mb-4">JOB</h1>
   
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
@@ -126,6 +145,7 @@ const JobEdit = () => {
               className={`border rounded-md p-2 w-full ${
                 errors.address ? "border-red-500" : ""
               }`}
+              disabled
             />
             {errors.address && (
               <p className="text-red-500">{errors.address}</p>
@@ -141,6 +161,7 @@ const JobEdit = () => {
               value={formData.companyName}
               onChange={handleInputChange}
               className="border rounded-md p-2 w-full"
+              disabled
             />
             {errors.companyName && (
             <p className="text-red-500">{errors.companyName}</p>
@@ -156,17 +177,22 @@ const JobEdit = () => {
               value={formData.industry}
               onChange={handleInputChange}
               className="border rounded-md p-2 w-full"
+              disabled
             />
           </div>
           <div>
             <label htmlFor="salary">Salary:</label>
-            <textarea
+            <input
+              type='number'
               id="salary"
               name="salary"
               value={formData.salary}
               onChange={handleInputChange}
               className="border rounded-md p-2 w-full"
             />
+            {errors.salary && (
+            <p className="text-red-500">{errors.salary}</p>
+            )}
           </div>
           <div>
             <label htmlFor="title">Title:</label>
@@ -186,7 +212,7 @@ const JobEdit = () => {
           <div>
             <label htmlFor="title">Max Number Of Application:</label>
             <input
-              type="text"
+              type="input"
               id="maxNoApplicants"
               name="maxNoApplicants"
               value={formData.maxNoApplicants}

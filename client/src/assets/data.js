@@ -1,12 +1,12 @@
 import { Link } from "react-router-dom";
-
+import { confirmAlert } from 'react-confirm-alert'; 
 const handleDeleteCompany = async (companyId) => {
   fetch(`/api/company/delete/${companyId}`, {
     method: "DELETE",
   })
     .then((response) => {
       if (response.ok) {
-        alert("Deleted company successfully");
+        // alert("Deleted company successfully");
       } else {
         alert("Error deleting company:", response.statusText);
       }
@@ -16,7 +16,22 @@ const handleDeleteCompany = async (companyId) => {
     });
   window.location.reload();
 };
-
+const handleDelete = (companyId) => {
+  confirmAlert({
+    title: 'Confirm to delete',
+    message: 'Are you sure to delete this.',
+    buttons: [
+      {
+        label: 'Yes',
+        onClick:  async () => {handleDeleteCompany(companyId)}
+      },
+      {
+        label: 'No',
+        onClick: () => {}
+      }
+    ]
+  });
+}
 export const companyData = {
   columns: [
     { field: "companyId", headerName: "ID", width: 50 },
@@ -68,7 +83,7 @@ export const companyData = {
       headerName: "Actions",
       width: 200,
       renderCell: (params) => (
-        <div>
+        <div className="flex gap-2">
           <Link
             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
             to={`/company/edit/${params.row.companyId}`}
@@ -77,7 +92,7 @@ export const companyData = {
           </Link>
           <button
             className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
-            onClick={() => handleDeleteCompany(params.row.companyId)}
+            onClick={() => handleDelete(params.row.companyId)}
           >
             Delete
           </button>

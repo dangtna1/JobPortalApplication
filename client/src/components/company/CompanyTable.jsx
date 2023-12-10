@@ -25,14 +25,15 @@ export default function CompanyTable() {
   }, []);
 
   return (
-    <div className="w-full">
+    <div className='w-full flex flex-col items-center gap-5'>
+    <div className='w-[95%] sm:w-[95%] border shadow-lg p-8 text-xl rounded-lg'>
       {/* <div className="font-semibold text-2xl px-2 py-4">Company</div> */}
 
       <div className="w-full p-4 z-0">
         <MyFilterModal />
       </div>
       <div style={{ height: "70vh", width: "100%" }} className="mb-4">
-        <div>
+        <div className="mb-4">
           <Link
             className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded transition duration-300 ease-in-out"
             to={"/company/create"}
@@ -56,12 +57,12 @@ export default function CompanyTable() {
                 },
               }}
               pageSizeOptions={[10, 15]}
-              checkboxSelection
               autoHeight={true}
             />
           )}
         </div>
       </div>
+    </div>
     </div>
   );
 }
