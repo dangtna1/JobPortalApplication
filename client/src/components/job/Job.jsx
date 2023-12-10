@@ -10,10 +10,13 @@ import { useDispatch } from 'react-redux';
 import { updateJobList } from '../../store/jobSlice';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
+import { useNavigate } from 'react-router-dom';
 
 
 const Job = ({ jobInfo }) => {
+    console.log("jobInfo",jobInfo)
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const formatter = new Intl.NumberFormat('vi-VN', {
         style: 'currency',
         currency: 'VND',
@@ -22,7 +25,7 @@ const Job = ({ jobInfo }) => {
     const handleDelete = (id) => {
         console.log("id:",id)
         confirmAlert({
-            title: 'Confirm to submit',
+            title: 'Confirm to delete',
             message: 'Are you sure to delete this.',
             buttons: [
               {
@@ -91,7 +94,7 @@ const Job = ({ jobInfo }) => {
             <Divider />
             <Grid container gap={2} justifyContent="flex-end">
                 <DeleteIcon onClick={() => handleDelete(jobId)}/>
-                <EditIcon onClick={() => {}}/>
+                <EditIcon onClick={() => {navigate(`edit/${jobId}`,  { state: jobInfo })}}/>
             </Grid>
         </div>
     )
