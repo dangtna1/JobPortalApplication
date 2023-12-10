@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import Job from '../job/Job'
-import { Grid } from '@mui/material'
+import { Button, Grid } from '@mui/material'
 import { useDispatch, useSelector } from "react-redux"
 import { fetchJobList } from '../../assets/api'
 import { updateJobList } from '../../store/jobSlice'
@@ -8,7 +8,9 @@ import Filter from '../utils/Filter'
 import FilterModal from '../utils/FilterModal'
 
 const Home = () => {
-    const jobList = useSelector((state) => state.job.jobList);
+    let jobList = useSelector((state) => state.job.jobList);
+    jobList = [...jobList];
+    const [sortType, setSortType] = useState("");
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -23,14 +25,43 @@ const Home = () => {
         fetchData();
     }, [dispatch]);
 
+    const sortFunction = (type) => {
+        if (type === sortType) {
+            setSortType("");
+            return;
+        }
+
+        setSortType(type);
+    }
+
+    if (sortType != "") {
+        if (!jobList.length) return;
+        if (sortType == "asc") {
+            jobList.sort(function (a, b) {
+                return a.salary - b.salary;
+            });
+        } else if (sortType == "des") {
+            jobList.sort(function (a, b) {
+                return b.salary - a.salary;
+            });
+        }
+    }
+
+
     return (
         <div className='w-full flex flex-col items-center justify-center'>
             <div className='w-full p-4 z-0'>
                 <FilterModal />
+                <div className="text-blue-600 px-4 flex items-center gap-2">
+                    <p>SORT BY SALARY</p>
+                    <Button style={{ border: "1px solid blue", backgroundColor: `${sortType === "asc" ? "blue" : "white"}`, color: `${sortType === "asc" ? "white" : "blue"}` }} onClick={() => sortFunction("asc")}>ascending</Button>
+                    <Button style={{ border: "1px solid blue", backgroundColor: `${sortType === "des" ? "blue" : "white"}`, color: `${sortType === "des" ? "white" : "blue"}` }} onClick={() => sortFunction("des")}>descending</Button>
+                </div>
             </div>
 
             <Grid container spacing={1}>
                 {
+
                     jobList.length ? jobList.map((job, index) => (
                         <Grid key={index} item xs={12} md={6}><Job jobInfo={job} /></Grid>
                     )) : (
