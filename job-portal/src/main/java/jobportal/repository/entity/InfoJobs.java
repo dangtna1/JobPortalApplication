@@ -22,6 +22,8 @@ public class InfoJobs {
     private int yearOfExp;
     private String companyName;
     private String industry;
+    private String description;
+    private String website_url;
 
     @OneToMany
     @JoinColumn(name = "job_id")

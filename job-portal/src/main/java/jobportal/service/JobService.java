@@ -23,9 +23,6 @@ public class JobService {
         return infoJobRepository.getInfoJob();
     }
 
-//    public InfoJobs getById(Integer id){
-//        return jobRepository.findByJobId(id);
-//    }
     public void create(AddJobRequest job) {
         Job newJob = this.jobMapping(job);
         jobRepository.save(newJob);

@@ -16,11 +16,6 @@ public class JobController {
     @Autowired
     private JobService jobService;
 
-//    @GetMapping("/by-id")
-//    public InfoJobs getById(@RequestParam Integer id){
-//        return jobService.getById(id);
-//    }
-
     @RequestMapping("/")
     public List<InfoJobs> getInfoJobs(){
         return jobService.getInfoJobs();
