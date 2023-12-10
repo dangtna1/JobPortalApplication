@@ -67,6 +67,13 @@ const CompanyEdit = () => {
       isValid = false;
     }
 
+    if (formData.phoneNumber) {
+      const phonePattern = /^\d+$/;
+      if (!phonePattern.test(formData.phoneNumber)) {
+        newErrors.phoneNumber = "Invalid phone number format";
+        isValid = false;
+      }
+    }
     setErrors(newErrors);
     return isValid;
   };
@@ -161,6 +168,9 @@ const CompanyEdit = () => {
             onChange={handleInputChange}
             className="border rounded-md p-2 w-full"
           />
+          {errors.phoneNumber && (
+            <p className="text-red-500">{errors.phoneNumber}</p>
+          )}
         </div>
         <div>
           <label htmlFor="industry">Industry:</label>

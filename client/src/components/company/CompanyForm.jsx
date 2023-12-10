@@ -14,7 +14,7 @@ const CompanyForm = () => {
     industry: "",
     description: "",
     websiteUrl: "",
-    email: ""
+    email: "",
   });
 
   const [errors, setErrors] = useState({
@@ -23,7 +23,7 @@ const CompanyForm = () => {
     industry: "",
     description: "",
     websiteUrl: "",
-    email: ""
+    email: "",
   });
 
   const validateForm = () => {
@@ -39,6 +39,20 @@ const CompanyForm = () => {
     if (!formData.email) {
       newErrors.email = "Company email is required";
       isValid = false;
+    } else {
+      const emailPattern = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
+      if (!emailPattern.test(formData.email)) {
+        newErrors.email = "Invalid email format";
+        isValid = false;
+      }
+    }
+
+    if (formData.phoneNumber) {
+      const phonePattern = /^\d+$/;
+      if (!phonePattern.test(formData.phoneNumber)) {
+        newErrors.phoneNumber = "Invalid phone number format";
+        isValid = false;
+      }
     }
     setErrors(newErrors);
     return isValid;
@@ -74,7 +88,7 @@ const CompanyForm = () => {
             industry: "",
             description: "",
             websiteUrl: "",
-            email: ""
+            email: "",
           });
           alert("Data posted successfully!");
 
@@ -124,6 +138,9 @@ const CompanyForm = () => {
             onChange={handleInputChange}
             className="border rounded-md p-2 w-full"
           />
+          {errors.phoneNumber && (
+            <p className="text-red-500">{errors.phoneNumber}</p>
+          )}
         </div>
         <div>
           <label htmlFor="industry">Industry:</label>
@@ -167,6 +184,7 @@ const CompanyForm = () => {
             onChange={handleInputChange}
             className="border rounded-md p-2 w-full"
           />
+          {errors.email && <p className="text-red-500">{errors.email}</p>}
         </div>
         <div>
           <Link
