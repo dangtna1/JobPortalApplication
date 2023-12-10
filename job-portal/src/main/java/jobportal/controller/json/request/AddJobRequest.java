@@ -21,7 +21,7 @@ public class AddJobRequest {
     @Pattern(regexp = "\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2}", message = "Invalid date format. Use yyyy-MM-dd HH:mm:ss")
     private String deadline;
 
-    private String status;
+    private boolean status;
 
     @NotNull(message = "This field shouldn't be null")
     private int maxNoApplicants;
@@ -35,7 +35,7 @@ public class AddJobRequest {
     private String responsibilities;
 
     @NotNull(message = "Salary shouldn't be null")
-    private BigDecimal salary;
+    private float salary;
 
     private int noApplicants;
 

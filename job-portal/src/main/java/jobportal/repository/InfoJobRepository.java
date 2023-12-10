@@ -10,6 +10,7 @@ import java.util.List;
 
 @Repository
 public interface InfoJobRepository extends JpaRepository<InfoJobs, Integer> {
+    InfoJobs getByJobId(Integer id);
     @Query(value = "CALL getInfoJob();", nativeQuery = true)
     List<InfoJobs> getInfoJob();
 

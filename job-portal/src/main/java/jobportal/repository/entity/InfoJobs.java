@@ -14,7 +14,12 @@ public class InfoJobs {
     private String title;
     private int salary;
     private String deadline;
+    private int maxNoApplicants;
+    private String requirement;
+    private String responsibilities;
+    private boolean status;
     private String address;
+    private int yearOfExp;
     private String companyName;
     private String industry;
 

@@ -16,12 +16,12 @@ public class Job {
     private int branchId;
     private String datePosted;
     private String deadline;
-    private String status;
+    private boolean status;
     private int maxNoApplicants;
     private String title;
     private String requirement;
     private String responsibilities;
-    private BigDecimal salary;
+    private float salary;
     private int noApplicants;
     private float yearOfExp;
 

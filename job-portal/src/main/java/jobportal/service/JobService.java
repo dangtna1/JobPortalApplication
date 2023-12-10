@@ -1,5 +1,6 @@
 package jobportal.service;
 
+import jobportal.controller.json.request.UpdateJobRequest;
 import jobportal.repository.InfoJobRepository;
 import jobportal.repository.JobRepository;
 import jobportal.controller.json.request.AddJobRequest;
@@ -22,18 +23,36 @@ public class JobService {
         return infoJobRepository.getInfoJob();
     }
 
+//    public InfoJobs getById(Integer id){
+//        return jobRepository.findByJobId(id);
+//    }
     public void create(AddJobRequest job) {
         Job newJob = this.jobMapping(job);
         jobRepository.save(newJob);
     }
 
+    public void updateJob(UpdateJobRequest job){
+        Job createdJob = jobRepository.findByJobId(job.getJobId());
+
+        createdJob.setDeadline(job.getDeadline());
+        createdJob.setStatus(job.isStatus());
+        createdJob.setMaxNoApplicants(job.getMaxNoApplicants());
+        createdJob.setTitle(job.getTitle());
+        createdJob.setRequirement(job.getRequirement());
+        createdJob.setResponsibilities(job.getResponsibilities());
+        createdJob.setSalary(job.getSalary());
+        createdJob.setYearOfExp(job.getYearOfExp());
+        jobRepository.save(createdJob);
+    }
     private Job jobMapping(AddJobRequest job) {
         Job newJob = new Job();
-        newJob.setStatus(job.getStatus());
+        newJob.setStatus(job.isStatus());
         newJob.setRequirement(job.getRequirement());
         newJob.setResponsibilities(job.getResponsibilities());
         newJob.setNoApplicants(job.getNoApplicants());
         newJob.setYearOfExp(job.getYearOfExp());
+        newJob.setSalary(job.getSalary());
+
         if (job.getCompanyId() != 0) {
             newJob.setCompanyId(job.getCompanyId());
         }
@@ -51,9 +70,6 @@ public class JobService {
         }
         if (job.getTitle() != null) {
             newJob.setTitle(job.getTitle());
-        }
-        if (job.getSalary() != null) {
-            newJob.setSalary(job.getSalary());
         }
         return newJob;
     }
