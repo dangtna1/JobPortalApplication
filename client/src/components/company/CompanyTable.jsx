@@ -15,6 +15,7 @@ export default function CompanyTable() {
     const fetchData = async () => {
       try {
         const companyList = await fetchCompanyList();
+        console.log(companyList)
         dispatch(updateCompanyList(companyList));
       } catch (error) {
         console.log(error);

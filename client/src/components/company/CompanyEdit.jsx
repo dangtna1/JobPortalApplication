@@ -122,7 +122,7 @@ const CompanyEdit = () => {
 
   return (
     <div className="container mx-auto">
-      <h1 className="text-2xl font-semibold mb-4">Add a company</h1>
+      <h1 className="text-2xl font-semibold mb-4">Edit a company</h1>
 
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>

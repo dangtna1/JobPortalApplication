@@ -4,9 +4,14 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import BusinessIcon from '@mui/icons-material/Business';
 import PlaceIcon from '@mui/icons-material/Place';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
+import { confirmAlert } from 'react-confirm-alert';
+import { deleteJob } from '../../assets/api';
+import { updateJobList } from '../../store/jobSlice';
+import { useDispatch } from 'react-redux';
 
 const JobProfile = () => {
     const navigate = useNavigate();
+    const dispatch = useDispatch();
     const location = useLocation();
     const [job, setJob] = useState(location.state);
     const formatter = new Intl.NumberFormat('vi-VN', {
@@ -14,20 +19,29 @@ const JobProfile = () => {
         currency: 'VND',
     });
 
-    return (
-        <div className='w-full flex flex-col items-center gap-5'>
-            {/* <div className='w-full bg-gradient-to-r from-[#000000] from-50% to-[#990033] to-100% h-[20vh] text-white flex justify-center'>
-                <div className='flex w-10/12 items-center'>
-                    <div className=' flex gap-2 '>
-                        <div>
-                            <p className=' text-2xl font-sans font-bold'>{job.title}</p>
-                            <p>{job.companyName}</p>
-                            <p>$ {job.salary}</p>
-                        </div>
-                    </div>
-                </div>
+    const handleDelete = (id) => {
+        console.log("id:", id)
+        confirmAlert({
+            title: 'Confirm to delete',
+            message: 'Are you sure to delete this.',
+            buttons: [
+                {
+                    label: 'Yes',
+                    onClick: async () => {
+                        const jobList = await deleteJob(id)
+                        dispatch(updateJobList(jobList));
+                    }
+                },
+                {
+                    label: 'No',
+                    onClick: () => { }
+                }
+            ]
+        });
+    }
 
-            </div> */}
+    return (
+        <div className='w-full flex flex-col items-center gap-5 '>
             <div className='w-[95%] sm:w-[60%] border shadow-lg p-8 text-xl rounded-lg '>
                 <p className=' '>{job.title}</p>
 

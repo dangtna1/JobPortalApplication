@@ -12,7 +12,7 @@ const handleDeleteCompany = async (companyId) => {
       }
     })
     .catch(() => {
-      alert("Deleted company successfully");
+      // alert("Deleted company successfully");
     });
   window.location.reload();
 };
@@ -71,11 +71,31 @@ export const companyData = {
       headerName: "Website URL",
       description: "This column is not sortable.",
       sortable: false,
-      width: 350,
+      width: 150,
       renderCell: (params) => (
         <a href={params.value} target="_blank" rel="noopener noreferrer">
           {params.value}
         </a>
+      ),
+    },
+    {
+      field: "branches",
+      headerName: "Branches",
+      description: "This column is not sortable.",
+      sortable: false,
+      width: 400,
+      innerHeight: 200,
+      renderCell: (params) => (
+        <div>
+          {
+            // console.log(params.row.branches)
+            params.row.branches.map((branch, index) => (
+                <li  key={index}>
+                    <span>{branch.address}</span>
+                </li>
+            ))
+          }
+        </div>
       ),
     },
     {
